@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Server</title>
+</head>
+<body>
+<p>Server example</p>
+<form action="/transfer" method="POST">
+    Имя: <input type="text" name="name"/>
+    Номер карты: <input type="number" name="cardNumber"/>
+    Номер счета: <input type="number" name="bankAccount"/>
+    Телефон: <input type="number" name="phone"/>
+    Сумма: <input type="number" name="summ">
+    <input type="submit" value="Перевести">
+</form>
+
+<form action="/view" method="POST">
+    <input type="submit" value="Показать информацию">
+</form>
+</body>
+</html>
