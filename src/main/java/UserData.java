@@ -1,50 +1,69 @@
+/*
+Класс с данными о пользователях
+ */
+
 public class UserData {
-    private long ID;
-    private long BANK_ACCOUNT;
-    private long CARD_NUMBER;
-    private long PHONE_NUMBER;
-    private String NAME;
+    private long id;
+    private double bankAccount;
+    private double cardNumber;
+    private double phoneNumber;
+    private double balance;
+    private String name;
     public UserData (){}
 
-    public UserData (long id, String name){}
-
-    public long getID() {
-        return ID;
+    public UserData (long id, String name, double bankAccount, double cardNumber, double phoneNumber, double balance){
+        this.name = name;
+        this.bankAccount = bankAccount;
+        this.cardNumber = cardNumber;
+        this.phoneNumber = phoneNumber;
+        this.balance = balance;
     }
 
-    public void setID(long ID) {
-        this.ID = ID;
+    public long getId() {
+        return id;
     }
 
-    public long getBANK_ACCOUNT() {
-        return BANK_ACCOUNT;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setBANK_ACCOUNT(long BANK_ACCOUNT) {
-        this.BANK_ACCOUNT = BANK_ACCOUNT;
+    public double getBankAccount() {
+        return bankAccount;
     }
 
-    public long getCARD_NUMBER() {
-        return CARD_NUMBER;
+    public void setBankAccount(double bankAccount) {
+        this.bankAccount = bankAccount;
     }
 
-    public void setCARD_NUMBER(long CARD_NUMBER) {
-        this.CARD_NUMBER = CARD_NUMBER;
+    public double getCardNumber() {
+        return cardNumber;
     }
 
-    public long getPHONE_NUMBER() {
-        return PHONE_NUMBER;
+    public void setCardNumber(double cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
-    public void setPHONE_NUMBER(long PHONE_NUMBER) {
-        this.PHONE_NUMBER = PHONE_NUMBER;
+    public double getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public String getNAME() {
-        return NAME;
+    public void setPhoneNumber(double phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setNAME(String NAME) {
-        this.NAME = NAME;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }
