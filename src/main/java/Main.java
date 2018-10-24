@@ -11,6 +11,6 @@ public class Main {
 
         //Создаем потокобезопасный контейнер для хранения пользовательских данных
 
-        ConcurrentMap  <id, User> USERS = new
+        ConcurrentMap  <id, User> USERS = new Map ();
     }
 }
