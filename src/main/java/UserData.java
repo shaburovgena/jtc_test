@@ -3,15 +3,18 @@
  */
 
 public class UserData {
-    private long id;
-    private double bankAccount;
-    private double cardNumber;
-    private double phoneNumber;
-    private double balance;
+    private int id;
+    private String bankAccount; //15 знаков формат ххххх ххххх ххххх
+    private String cardNumber;  //16 знаков формат хххх хххх хххх хххх
+    private String phoneNumber; //10 знаков формат хххххххххх
+    private long balance;
     private String name;
-    public UserData (){}
 
-    public UserData (long id, String name, double bankAccount, double cardNumber, double phoneNumber, double balance){
+    public UserData() {
+    }
+
+    public UserData(int id, String name, String bankAccount, String cardNumber, String phoneNumber, long balance) {
+        this.id = id;
         this.name = name;
         this.bankAccount = bankAccount;
         this.cardNumber = cardNumber;
@@ -19,7 +22,7 @@ public class UserData {
         this.balance = balance;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -27,27 +30,27 @@ public class UserData {
         this.id = id;
     }
 
-    public double getBankAccount() {
+    public String getBankAccount() {
         return bankAccount;
     }
 
-    public void setBankAccount(double bankAccount) {
+    public void setBankAccount(String bankAccount) {
         this.bankAccount = bankAccount;
     }
 
-    public double getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(double cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 
-    public double getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(double phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -59,11 +62,11 @@ public class UserData {
         this.name = name;
     }
 
-    public double getBalance() {
+    public long getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(long balance) {
         this.balance = balance;
     }
 }

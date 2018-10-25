@@ -19,7 +19,7 @@ public class StartServer implements Runnable {
         running = false;
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.addServlet(new ServletHolder(new MainServlet()), "/signin");
+        context.addServlet(new ServletHolder(new MainServlet()), "/transfer");
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase("public_html");
 
