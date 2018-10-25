@@ -10,6 +10,7 @@ public class MainServlet extends HttpServlet {
 
     public MainServlet(ArrayList<UserData> usersList) {
         this.usersList = usersList;
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
