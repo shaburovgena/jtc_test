@@ -14,9 +14,9 @@ public class Main {
                 (1, "petr", "99999 88888 77777", "9999 8888 7777 6666", "0987654321", 100));
 
         Transaction first = new Transaction(usersList, usersList.get(0), "0987654321", 1000);
-        first.ifExist();
-        first.checker();
-        first.transfer();
+//        first.ifExist();
+//        first.checker();
+//        first.transfer();
 
     }
 }
