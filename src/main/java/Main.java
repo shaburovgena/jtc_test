@@ -1,11 +1,8 @@
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-//        StartServer server = new StartServer();
-//        server.start();
-
 
         ArrayList<UserData> usersList = new ArrayList();
         usersList.add(new UserData
@@ -21,12 +18,16 @@ public class Main {
         usersList.add(new UserData
                 (5, "masha", "66666-66666-66666", "5555 5555 5555 5555", "6666666666", 200));
         System.out.println(usersList.get(2).getName());
-        Transaction first = new Transaction(usersList, usersList.get(2), "4444 4444 4444 4444", 1000);
+        Transaction first = new Transaction(usersList, "1111111111", "4444 4444 4444 4444", 1000);
         first.transfer();
-        usersList.remove(3);
+//        usersList.remove(3);
         first.viewAll();
-        Transaction second = new Transaction(usersList, usersList.get(2), "4444 4444 4444 4444", 1000);
+        Transaction second = new Transaction(usersList, "66666-66666-66666", "4444 4444 4444 4444", 1000);
         second.transfer();
         second.viewAll();
+
+        StartServer server = new StartServer(usersList);
+        server.start();
+
     }
 }

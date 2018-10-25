@@ -3,12 +3,12 @@
  */
 
 public class UserData {
-    private int id, i;
-    private String bankAccount; //15 знаков формат ххххх ххххх ххххх
+    private int id;
+    private String bankAccount; //15 знаков формат ххххх-ххххх-ххххх
     private String cardNumber;  //16 знаков формат хххх хххх хххх хххх
     private String phoneNumber; //10 знаков формат хххххххххх
-    private long balance;
-    private String name;
+    private long balance;       //сумма на счету
+    private String name;        //имя держателя счета
 
     public UserData() {
     }

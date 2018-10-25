@@ -6,6 +6,8 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
+import java.util.ArrayList;
+
 /*
 Запуск WEB-сервера
 Точка входа для ввода данных
@@ -15,11 +17,11 @@ public class StartServer implements Runnable {
     boolean running;
     Thread thread;
 
-    public StartServer() {
+    public StartServer(ArrayList<UserData> usersList) {
         running = false;
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.addServlet(new ServletHolder(new MainServlet()), "/transfer");
+        context.addServlet(new ServletHolder(new MainServlet(usersList)), "/transfer");
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase("public_html");
 

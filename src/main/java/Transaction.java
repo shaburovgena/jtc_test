@@ -7,20 +7,10 @@ import java.util.ArrayList;
 public class Transaction {
     ArrayList<UserData> usersList;
     private UserData srcUser, dstUser;
-    private long srcBalance, dstBalance;
-    private long summ, balance;
-    private String dstNumber;
-    private int id;
+    private long summ;
+    private String dstNumber, srcNumber;
 
-    //Создаем объект транзакции
-//TODO:Это тестовая транзакция, удалить, так как получать мы будем номер счета, карты или телефона
-//    public Transaction(UserData srcUser, UserData dstUser, long summ) {
-//        this.srcUser = srcUser;
-//        this.dstUser = dstUser;
-//        this.summ = summ;
-//    }
 
-    //Основной конструктор, так как перевод будет осущетсвляться по номеру счета, карты или телефона
     public Transaction(ArrayList<UserData> usersList, UserData srcUser, String dstNumber, long summ) {
         this.usersList = usersList;
         this.srcUser = srcUser;
@@ -28,25 +18,54 @@ public class Transaction {
         this.summ = summ;
     }
 
-    //Выполняем проверку на вводные данные
+    //Основной конструктор, так как перевод будет осущетсвляться по номеру счета, карты или телефона
+    public Transaction(ArrayList<UserData> usersList, String srcNumber, String dstNumber, long summ) {
+        this.usersList = usersList;
+        this.srcNumber = srcNumber;
+        this.dstNumber = dstNumber;
+        this.summ = summ;
+    }
+
+    //Выполняем проверку на вводные данные, разделил чтобы конкретизировать подсказку клиенту
     //Источник и получатель должны быть в базе
-    public synchronized int ifExist() {
-        int id = -1;
+    public synchronized boolean ifSrcExist() {
+        boolean ifSrcExist = false;
         for (UserData user : usersList) {
-            if (dstNumber.equals(user.getBankAccount()) || dstNumber.equals(user.getCardNumber())
-                    || dstNumber.equals(user.getPhoneNumber())) {
-                id = user.getId();
-                dstUser = user;
+            //Проверяем реквизиты счета списания
+            if (srcNumber.equals(user.getBankAccount()) || srcNumber.equals(user.getCardNumber())
+                    || srcNumber.equals(user.getPhoneNumber())) {
+                srcUser = user;
+                ifSrcExist = true;
+                System.out.println("Пользователь счета списания  " + srcUser.getName());
+                break;
+            } else {
+                System.out.println("Счет списания не найден, проверьте реквизиты");
             }
         }
-        System.out.println("ID совпавшей записи  " + id);
-        return id;
+        return ifSrcExist;
+    }
+
+    public synchronized boolean ifDstExist() {
+        boolean ifDstExist = false;
+        for (UserData user : usersList) {
+            //Проверяем реквизиты счета зачисления
+            if (dstNumber.equals(user.getBankAccount()) || dstNumber.equals(user.getCardNumber())
+                    || dstNumber.equals(user.getPhoneNumber())) {
+                dstUser = user;
+                System.out.println("Пользователь счета назначения  " + dstUser.getName());
+                ifDstExist = true;
+                break;
+            } else {
+                System.out.println("Счет зачиления не найден, проверьте реквизиты");
+            }
+        }
+        return ifDstExist;
     }
 
 
     //Сумма перевода должна быть положительным числом и больше баланса источника
     public synchronized boolean checker() {
-        if (summ < srcUser.getBalance() && summ > 0 && ifExist() >= 0) {
+        if (summ < srcUser.getBalance() && summ > 0) {
             System.out.println("Операция разрешена");
             return true;
         } else {
@@ -57,18 +76,15 @@ public class Transaction {
 
     //TODO: Выполняем математические операции с балансом, должен вернуть и баланс источника и получателя
     public synchronized void transfer() {
-        ifExist();
+        ifSrcExist();
+        ifDstExist();
         checker();
-        srcBalance = srcUser.getBalance();
-        dstBalance = dstUser.getBalance();
-        if (checker()) {
-            srcBalance = srcBalance - summ;
-            dstBalance = dstBalance + summ;
-            srcUser.setBalance(srcBalance);
-            usersList.get(id).setBalance(dstBalance);
+        if (checker() && ifDstExist() && ifSrcExist()) {
+            srcUser.setBalance(srcUser.getBalance() - summ);
+            dstUser.setBalance(dstUser.getBalance() + summ);
         }
         System.out.println("Остаток на счете пользователя источника   " + srcUser.getBalance());
-        System.out.println("Остаток на счете пользователя получателя   " + usersList.get(id).getBalance());
+        System.out.println("Остаток на счете пользователя получателя   " + dstUser.getBalance());
 
     }
 
@@ -76,8 +92,9 @@ public class Transaction {
         for (UserData user : usersList) {
             System.out.println(user.getId());
             System.out.println(user.getName());
-            System.out.println(user.getPhoneNumber());
             System.out.println(user.getCardNumber());
+            System.out.println(user.getBankAccount());
+            System.out.println(user.getPhoneNumber());
             System.out.println(user.getBalance());
         }
     }
