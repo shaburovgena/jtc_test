@@ -3,7 +3,7 @@
  */
 
 public class UserData {
-    private int id;
+    private int id, i;
     private String bankAccount; //15 знаков формат ххххх ххххх ххххх
     private String cardNumber;  //16 знаков формат хххх хххх хххх хххх
     private String phoneNumber; //10 знаков формат хххххххххх

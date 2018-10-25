@@ -14,11 +14,11 @@ public class Transaction {
 
     //Создаем объект транзакции
 //TODO:Это тестовая транзакция, удалить, так как получать мы будем номер счета, карты или телефона
-    public Transaction(UserData srcUser, UserData dstUser, long summ) {
-        this.srcUser = srcUser;
-        this.dstUser = dstUser;
-        this.summ = summ;
-    }
+//    public Transaction(UserData srcUser, UserData dstUser, long summ) {
+//        this.srcUser = srcUser;
+//        this.dstUser = dstUser;
+//        this.summ = summ;
+//    }
 
     //Основной конструктор, так как перевод будет осущетсвляться по номеру счета, карты или телефона
     public Transaction(ArrayList<UserData> usersList, UserData srcUser, String dstNumber, long summ) {
