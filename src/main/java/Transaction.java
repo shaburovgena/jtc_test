@@ -36,6 +36,7 @@ public class Transaction {
             if (dstNumber.equals(user.getBankAccount()) || dstNumber.equals(user.getCardNumber())
                     || dstNumber.equals(user.getPhoneNumber())) {
                 id = user.getId();
+                dstUser = user;
             }
         }
         System.out.println("ID совпавшей записи  " + id);
@@ -45,17 +46,21 @@ public class Transaction {
 
     //Сумма перевода должна быть положительным числом и больше баланса источника
     public synchronized boolean checker() {
-        if (summ > srcUser.getBalance() && summ > 0 && ifExist() >= 0) {
+        if (summ < srcUser.getBalance() && summ > 0 && ifExist() >= 0) {
+            System.out.println("Операция разрешена");
             return true;
         } else {
+            System.out.println("На счете недостаточно средств или не указана сумма");
             return false;
         }
     }
 
     //TODO: Выполняем математические операции с балансом, должен вернуть и баланс источника и получателя
-    public synchronized UserData transfer() {
+    public synchronized void transfer() {
+        ifExist();
+        checker();
         srcBalance = srcUser.getBalance();
-        dstBalance = usersList.get(id).getBalance();
+        dstBalance = dstUser.getBalance();
         if (checker()) {
             srcBalance = srcBalance - summ;
             dstBalance = dstBalance + summ;
@@ -65,7 +70,15 @@ public class Transaction {
         System.out.println("Остаток на счете пользователя источника   " + srcUser.getBalance());
         System.out.println("Остаток на счете пользователя получателя   " + usersList.get(id).getBalance());
 
-        return srcUser;
     }
 
+    public synchronized void viewAll() {
+        for (UserData user : usersList) {
+            System.out.println(user.getId());
+            System.out.println(user.getName());
+            System.out.println(user.getPhoneNumber());
+            System.out.println(user.getCardNumber());
+            System.out.println(user.getBalance());
+        }
+    }
 }
