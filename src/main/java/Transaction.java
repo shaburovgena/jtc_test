@@ -8,7 +8,7 @@ public class Transaction {
     ArrayList<UserData> usersList;
     private UserData srcUser, dstUser;
     private long summ;
-    private String dstNumber, srcNumber;
+    private String dstNumber, srcNumber, allUsers;
 
 
     public Transaction(ArrayList<UserData> usersList, UserData srcUser, String dstNumber, long summ) {
@@ -52,7 +52,7 @@ public class Transaction {
             if (dstNumber.equals(user.getBankAccount()) || dstNumber.equals(user.getCardNumber())
                     || dstNumber.equals(user.getPhoneNumber())) {
                 dstUser = user;
-                System.out.println("Пользователь счета назначения  " + dstUser.getName());
+                System.out.println("Пользователь счета зачисления  " + dstUser.getName());
                 ifDstExist = true;
                 break;
             } else {
@@ -82,20 +82,26 @@ public class Transaction {
         if (checker() && ifDstExist() && ifSrcExist()) {
             srcUser.setBalance(srcUser.getBalance() - summ);
             dstUser.setBalance(dstUser.getBalance() + summ);
+            System.out.println("Остаток на счете списания   " + srcUser.getBalance());
+            System.out.println("Остаток на счете зачисления   " + dstUser.getBalance());
+        }else {
+            System.out.println("Операция не выполнена");
         }
-        System.out.println("Остаток на счете пользователя источника   " + srcUser.getBalance());
-        System.out.println("Остаток на счете пользователя получателя   " + dstUser.getBalance());
 
     }
 
-    public synchronized void viewAll() {
+    public synchronized String viewAll() {
+
         for (UserData user : usersList) {
-            System.out.println(user.getId());
-            System.out.println(user.getName());
-            System.out.println(user.getCardNumber());
-            System.out.println(user.getBankAccount());
-            System.out.println(user.getPhoneNumber());
-            System.out.println(user.getBalance());
+            allUsers += user.getId() + "\t" + user.getName() + "\t" + user.getBankAccount() + "\n" + user.getCardNumber() + "\t" + user.getPhoneNumber() + "\t" + user.getBalance() + "\n\n";
+//
+//                    System.out.println(user.getId());
+//            System.out.println(user.getName());
+//            System.out.println(user.getCardNumber());
+//            System.out.println(user.getBankAccount());
+//            System.out.println(user.getPhoneNumber());
+//            System.out.println(user.getBalance());
         }
+        return allUsers;
     }
 }

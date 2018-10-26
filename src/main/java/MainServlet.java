@@ -20,9 +20,9 @@ public class MainServlet extends HttpServlet {
 
         Transaction transaction = new Transaction(usersList, src, dst, summ);
         transaction.transfer();
-        transaction.viewAll();
+        String report = transaction.viewAll();
         response.setContentType("text/html;charset=utf-8");
-        response.getWriter().println("Перевод удался");
+        response.getWriter().println(report);
         response.setStatus(HttpServletResponse.SC_OK);
     }
 }
