@@ -22,7 +22,7 @@ public class StartServer implements Runnable {
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new MainServlet(clientList)), "/transfer");
-        context.addServlet(new ServletHolder(new ViewServlet(clientList)), "/transfer");
+        context.addServlet(new ServletHolder(new ViewServlet(clientList)), "/view");
 
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase("public_html");
