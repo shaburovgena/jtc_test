@@ -1,4 +1,3 @@
-import javax.servlet.Servlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,7 +6,7 @@ import java.io.IOException;
 public class ViewServlet extends HttpServlet {
     private final ClientList clientList;
 
-    public ViewServlet(ClientList clientList) {
+    ViewServlet(ClientList clientList) {
         this.clientList = clientList;
     }
 

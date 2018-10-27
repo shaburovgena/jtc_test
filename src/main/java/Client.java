@@ -3,7 +3,6 @@
  */
 
 public class Client {
-    private int id;
     private String bankAccount; //15 знаков формат ххххх-ххххх-ххххх
     private String cardNumber;  //16 знаков формат хххх хххх хххх хххх
     private String phoneNumber; //10 знаков формат хххххххххх
@@ -14,20 +13,11 @@ public class Client {
     }
 
     public Client(String name, String bankAccount, String cardNumber, String phoneNumber, long balance) {
-//        this.setId(-1);
         this.setName(name);
         this.setBankAccount(bankAccount);
         this.setCardNumber(cardNumber);
         this.setPhoneNumber(phoneNumber);
         this.setBalance(balance);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getBankAccount() {

@@ -2,13 +2,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainServlet extends HttpServlet {
 
     private final ClientList clientList;
 
-    public MainServlet(ClientList clientList) {
+    MainServlet(ClientList clientList) {
         this.clientList = clientList;
     }
 
@@ -16,8 +15,8 @@ public class MainServlet extends HttpServlet {
         String src = request.getParameter("src");
         String dst = request.getParameter("dst");
         long summ = Long.parseLong(request.getParameter("summ"));
-        Transaction transaction = new Transaction(clientList, src, dst, summ);
-        String report = transaction.transfer();
+        Transaction transaction = new Transaction(clientList);
+        String report = transaction.transfer(src, dst, summ);
         response.setContentType("text/html;charset=utf-8");
         response.getWriter().println(report);
         response.setStatus(HttpServletResponse.SC_OK);

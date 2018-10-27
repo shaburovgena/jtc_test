@@ -6,8 +6,6 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
-import java.util.ArrayList;
-
 /*
 Запуск WEB-сервера
 Точка входа для ввода данных

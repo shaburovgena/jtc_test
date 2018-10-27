@@ -7,67 +7,63 @@ import java.util.ArrayList;
 public class Transaction {
     ArrayList<Client> clientsList;
     private Client srcClient, dstClient;
-    private long summ;
-    private String dstNumber, srcNumber;
 
     //Основной конструктор, так как перевод будет осущетсвляться по номеру счета, карты или телефона
-    public Transaction(ClientList clientsList, String srcNumber, String dstNumber, long summ) {
+    public Transaction(ClientList clientsList) {
         this.clientsList = clientsList.get();
-        this.srcNumber = srcNumber;
-        this.dstNumber = dstNumber;
-        this.summ = summ;
     }
 
     //Выполняем проверку на вводные данные, разделил чтобы конкретизировать подсказку клиенту
     //Источник и получатель должны быть в базе
-    public boolean ifSrcExist() {
-        boolean ifSrcExist = false;
+    public Client ifSrcExist(String srcNumber) {
+        Client srcClient = null;
         for (Client client : clientsList) {
             //Проверяем реквизиты счета списания
             if (srcNumber.equals(client.getBankAccount()) || srcNumber.equals(client.getCardNumber())
                     || srcNumber.equals(client.getPhoneNumber())) {
-                srcClient = client;//Если есть совпадение с базой вернуть true
-                ifSrcExist = true;
+                srcClient = client;
                 break;
             }
         }
-        return ifSrcExist;
+        return srcClient;
     }
 
-    public boolean ifDstExist() {
-        boolean ifDstExist = false;
+    public Client ifDstExist(String dstNumber) {
+        Client dstClient = null;
         for (Client client : clientsList) {
             //Проверяем реквизиты счета зачисления
             if (dstNumber.equals(client.getBankAccount()) || dstNumber.equals(client.getCardNumber())
                     || dstNumber.equals(client.getPhoneNumber())) {
-                dstClient = client; //Если есть совпадение с базой вернуть true
-                ifDstExist = true;
+                dstClient = client;
                 break;
             }
         }
-        return ifDstExist;
+        return dstClient;
     }
 
 
     //Сумма перевода должна быть положительным числом и больше баланса источника
-    public boolean checker() {
-        if (summ < srcClient.getBalance() && summ > 0) {
+    public boolean checker(long summ) {
+        if (summ <= srcClient.getBalance() && summ > 0) {
             return true;//Операция разрешена
         } else {
+            System.out.println("Неверно указана сумма или недостаточно средств");
             return false;//На счете недостаточно средств или не указана сумма
         }
     }
 
     //Выполняем перевод, списываем с одного счета, зачисляем на другой
-    public synchronized String transfer() {
-        ifSrcExist();
-        ifDstExist();
-        checker();
-        if (checker() && ifDstExist() && ifSrcExist()) {
+    public synchronized String transfer(String srcNumber, String dstNumber, long summ) {
+        this.srcClient = ifSrcExist(srcNumber);
+        this.dstClient = ifDstExist(dstNumber);
+        checker(summ);
+        if (checker(summ) && dstClient != null && srcClient != null) {
             srcClient.setBalance(srcClient.getBalance() - summ);
             dstClient.setBalance(dstClient.getBalance() + summ);
+            System.out.println("Выполнено. Остаток на счете  " + srcClient.getBalance());
             return "Выполнено. Остаток на счете  " + srcClient.getBalance();
         } else {
+            System.out.println("Операция не выполнена");
             return "Операция не выполнена";
 
         }
