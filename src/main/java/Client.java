@@ -2,7 +2,7 @@
 Класс с данными о пользователях
  */
 
-public class UserData {
+public class Client {
     private int id;
     private String bankAccount; //15 знаков формат ххххх-ххххх-ххххх
     private String cardNumber;  //16 знаков формат хххх хххх хххх хххх
@@ -10,16 +10,16 @@ public class UserData {
     private long balance;       //сумма на счету
     private String name;        //имя держателя счета
 
-    public UserData() {
+    public Client() {
     }
 
-    public UserData(int id, String name, String bankAccount, String cardNumber, String phoneNumber, long balance) {
-        this.id = id;
-        this.name = name;
-        this.bankAccount = bankAccount;
-        this.cardNumber = cardNumber;
-        this.phoneNumber = phoneNumber;
-        this.balance = balance;
+    public Client(String name, String bankAccount, String cardNumber, String phoneNumber, long balance) {
+//        this.setId(-1);
+        this.setName(name);
+        this.setBankAccount(bankAccount);
+        this.setCardNumber(cardNumber);
+        this.setPhoneNumber(phoneNumber);
+        this.setBalance(balance);
     }
 
     public int getId() {

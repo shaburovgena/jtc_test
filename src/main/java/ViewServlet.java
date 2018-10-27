@@ -1,23 +1,18 @@
+import javax.servlet.Servlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class MainServlet extends HttpServlet {
-
+public class ViewServlet extends HttpServlet {
     private final ClientList clientList;
 
-    public MainServlet(ClientList clientList) {
+    public ViewServlet(ClientList clientList) {
         this.clientList = clientList;
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String src = request.getParameter("src");
-        String dst = request.getParameter("dst");
-        long summ = Long.parseLong(request.getParameter("summ"));
-        Transaction transaction = new Transaction(clientList, src, dst, summ);
-        String report = transaction.transfer();
+        String report = clientList.viewAll();
         response.setContentType("text/html;charset=utf-8");
         response.getWriter().println(report);
         response.setStatus(HttpServletResponse.SC_OK);

@@ -17,11 +17,13 @@ public class StartServer implements Runnable {
     boolean running;
     Thread thread;
 
-    public StartServer(ArrayList<UserData> usersList) {
+    public StartServer(ClientList clientList) {
         running = false;
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.addServlet(new ServletHolder(new MainServlet(usersList)), "/transfer");
+        context.addServlet(new ServletHolder(new MainServlet(clientList)), "/transfer");
+        context.addServlet(new ServletHolder(new ViewServlet(clientList)), "/transfer");
+
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase("public_html");
 
@@ -56,7 +58,6 @@ public class StartServer implements Runnable {
     public void run() {
         try {
             server.start();
-            System.out.println("Server started");
             server.join();
         } catch (Exception e) {
             e.printStackTrace();
