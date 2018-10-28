@@ -2,7 +2,7 @@
 
 public class Main {
     public static void main(String[] args) {
-
+        //Создаем базу пользователей
         ClientList clientList = new ClientList();
         clientList.add(new Client
                 ("ivan", "11111-11111-11111", "1111 1111 1111 1111", "1111111111", 99999));
@@ -17,7 +17,7 @@ public class Main {
         clientList.add(new Client
                 ("masha", "66666-66666-66666", "5555 5555 5555 5555", "6666666666", 200));
 
-
+        //Стартуем сервер
         StartServer server = new StartServer(clientList);
         server.start();
 

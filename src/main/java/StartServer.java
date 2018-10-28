@@ -11,11 +11,11 @@ import org.eclipse.jetty.servlet.ServletHolder;
 Точка входа для ввода данных
  */
 public class StartServer implements Runnable {
-    Server server;
-    boolean running;
-    Thread thread;
+    private Server server;
+    private boolean running;
+    private Thread thread;
 
-    public StartServer(ClientList clientList) {
+    StartServer(ClientList clientList) {
         running = false;
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
@@ -32,7 +32,7 @@ public class StartServer implements Runnable {
         server.setHandler(handlers);
     }
 
-    public synchronized void start() {
+    synchronized void start() {
         if (running)
             return;
 
@@ -41,7 +41,7 @@ public class StartServer implements Runnable {
         thread.start();
     }
 
-    public synchronized void stop() {
+    synchronized void stop() {
         if (!running)
             return;
 
