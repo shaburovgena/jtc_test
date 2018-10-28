@@ -11,6 +11,7 @@ public class ViewServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //Показываем информацию по всей базе
         String report = clientList.viewAll();
         response.setContentType("text/html;charset=utf-8");
         response.getWriter().println(report);

@@ -3,16 +3,16 @@
  */
 
 public class Client {
-    private String bankAccount; //15 знаков формат ххххх-ххххх-ххххх
-    private String cardNumber;  //16 знаков формат хххх хххх хххх хххх
-    private String phoneNumber; //10 знаков формат хххххххххх
-    private long balance;       //сумма на счету
-    private String name;        //имя держателя счета
+    public String bankAccount; //15 знаков формат ххххх-ххххх-ххххх
+    public String cardNumber;  //16 знаков формат хххх хххх хххх хххх
+    public String phoneNumber; //10 знаков формат хххххххххх
+    public long balance;       //сумма на счету
+    public String name;        //имя держателя счета
 
     public Client() {
     }
 
-    public Client(String name, String bankAccount, String cardNumber, String phoneNumber, long balance) {
+     Client(String name, String bankAccount, String cardNumber, String phoneNumber, long balance) {
         this.setName(name);
         this.setBankAccount(bankAccount);
         this.setCardNumber(cardNumber);

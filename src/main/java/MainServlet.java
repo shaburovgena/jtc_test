@@ -12,13 +12,20 @@ public class MainServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //Получаем параметры из запроса
         String src = request.getParameter("src");
         String dst = request.getParameter("dst");
         long summ = Long.parseLong(request.getParameter("summ"));
+        //Выполняем перевод
         Transaction transaction = new Transaction(clientList);
-        String report = transaction.transfer(src, dst, summ);
+        boolean report = transaction.transfer(src, dst, summ);
         response.setContentType("text/html;charset=utf-8");
-        response.getWriter().println(report);
-        response.setStatus(HttpServletResponse.SC_OK);
+        if (report) {
+            response.getWriter().println("Операция выполнена");
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            response.getWriter().println("Операция не выполнена");
+            response.setStatus(HttpServletResponse.SC_OK);
+        }
     }
 }
